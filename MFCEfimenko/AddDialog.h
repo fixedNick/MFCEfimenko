@@ -47,4 +47,6 @@ public:
 	CEdit t_amount;
 	CEdit t_price;
 	CTabCtrl TabManager;
+	afx_msg void BtnToLeftClicked();
+	afx_msg void BtnToRightClicked();
 };

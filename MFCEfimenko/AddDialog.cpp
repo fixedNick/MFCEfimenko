@@ -7,6 +7,8 @@
 #include "afxdialogex.h"
 
 
+int TABS_COUNT = 2;
+
 // AddDialog dialog
 
 IMPLEMENT_DYNAMIC(AddDialog, CDialogEx)
@@ -102,6 +104,8 @@ BEGIN_MESSAGE_MAP(AddDialog, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO_APPLE, &AddDialog::OnBnClickedRadioFruit)
 	ON_BN_CLICKED(IDOK, &AddDialog::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_CHECK1, &AddDialog::OnBnClickedCheck1)
+	ON_BN_CLICKED(IDC_BUTTON1, &AddDialog::BtnToLeftClicked)
+	ON_BN_CLICKED(IDC_BUTTON2, &AddDialog::BtnToRightClicked)
 END_MESSAGE_MAP()
 
 
@@ -122,6 +126,9 @@ BOOL AddDialog::OnInitDialog()
 	if (f_index >= 0)
 		pDoc->saladRecipe.LoadObj(this, f_index);
 	// TODO:  Add extra initialization here
+
+	TabManager.InsertItem(0, "Fruit");
+	TabManager.InsertItem(1, "Apple");
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -177,3 +184,21 @@ void AddDialog::OnBnClickedCheck1()
 	}
 }
 	// TODO: Add your control notification handler code here
+
+void AddDialog::BtnToLeftClicked()
+{
+	TabManager.SetCurSel(TabManager.GetCurSel() == 0 ?
+		(TABS_COUNT - 1) :
+		(TabManager.GetCurSel() - 1));
+	// TODO: Add your control notification handler code here
+}
+
+
+void AddDialog::BtnToRightClicked()
+{
+	TabManager.SetCurSel(TabManager.GetCurSel() == (TABS_COUNT - 1) ?
+		0 :
+		(TabManager.GetCurSel() + 1));
+	// TODO: Add your control notification handler code here
+	// TODO: Add your control notification handler code here
+}
